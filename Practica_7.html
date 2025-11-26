@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página con JavaScript</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        header {
+            text-align: center;
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        nav li {
+            background-color: #4a90e2;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+            padding-bottom: 5px;
+        }
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+        input, select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        #caja {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(90deg, rgb(8, 0, 255), white, rgb(19, 193, 236));
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            margin: 20px auto;
+        }
+        .calculadora-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .calculadora-fila {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #4a90e2;
+            color: white;
+            border-radius: 10px;
+        }
+        body.modo-oscuro {
+            background-color: #222;
+            color: #eee;
+        }
+        body.modo-oscuro section {
+            background-color: #333;
+        }
+        body.modo-oscuro h2 {
+            color: #6ba8ff;
+            border-bottom-color: #6ba8ff;
+        }
+        body.modo-oscuro button {
+            background-color: #6ba8ff;
+        }
+        body.modo-oscuro button:hover {
+            background-color: #4a90e2;
+        }
+        body.modo-oscuro input, 
+        body.modo-oscuro select {
+            background-color: #444;
+            color: #eee;
+            border-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mi Página Web Interactiva con JavaScript</h1>
+        <p>Demostración de diferentes funciones y ejemplos básicos de JS</p>
+    </header>
+    <nav>
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="#saludos">Saludos con alertas</a></li>
+            <li><a href="#precio">Calcular precio</a></li>
+            <li><a href="#contador">Contador</a></li>
+            <li><a href="#texto">Cambiar texto</a></li>
+            <li><a href="#modo">Modo oscuro</a></li>
+            <li><a href="#formulario">Validación</a></li>
+            <li><a href="#cuadro">Cuadro animado</a></li>
+            <li><a href="#calculadora">Calculadora</a></li>
+        </ul>
+    </nav>
+    <section id="saludos">
+        <h2>1. Saludos Automáticos</h2>
+        <p>Al cargar la página, se muestran dos saludos usando alert().</p>
+        <button onclick="mostrarSaludos()">Mostrar Saludos</button>
+        <script>
+            function mostrarSaludos() {
+                let nombre = "Axel Josafat";
+                alert("Hola " + nombre + ", bienvenido al curso de JavaScript!");
+
+                let nombre2 = "Esto es JavaScript";
+                alert("! " + nombre2 + ", listo para aprender más!");
+            }
+        </script>
+    </section>
+    <section id="precio">
+        <h2>2. Calcular Precio</h2>
+        <p>Ejemplo de función que calcula un precio según una condición.</p>
+        <p>Si el precio es mayor a 100, se resta 50. Si es menor, se multiplica por 10.</p>
+        <input type="number" id="precioInput" placeholder="Ingresa un precio" min="0">
+        <button onclick="calcularPrecio()">Calcular Precio</button>
+        <p id="resultadoPrecio"></p>
+        <script>
+            function calcularPrecio() {
+                let precio = parseFloat(document.getElementById("precioInput").value);
+                let resultado = document.getElementById("resultadoPrecio");
+                let precioFinal;
+                if(precio > 100){
+                    precioFinal = precio - 50;
+                    resultado.textContent = "Precio original: Bs" + precio + ". Descuento aplicado: -$50. Precio final: Bs" + precioFinal;
+                } else {
+                    precioFinal = precio * 10;
+                    resultado.textContent = "Precio original: Bs" + precio + ". Multiplicado por 10. Precio final: Bs" + precioFinal;
+                }
+                resultado.style.color = "green";
+            }
+        </script>
+    </section>
+    <section id="contador">
+        <h2>3. Contador con While</h2>
+        <p>Este script muestra números del 1 al 10.</p>
+        <button onclick="mostrarContador()">Mostrar Contador</button>
+        <div id="contadorResultado"></div>
+        <script>
+            function mostrarContador() {
+                let contador = 1;
+                let resultado = document.getElementById("contadorResultado");
+                resultado.innerHTML = "";
+                while (contador <= 10) {
+                    resultado.innerHTML += "El contador es: " + contador + "<br>";
+                    contador++;
+                }
+            }
+        </script>
+    </section>
+    <section id="texto">
+        <h2>4. Cambiar Texto con Botón</h2>
+        <h3 id="titulo">Texto Original</h3>
+        <button onclick="cambiarTexto()">Cambiar Texto</button>
+        <button onclick="restaurarTexto()">Restaurar Texto</button>
+        <script>
+            function cambiarTexto(){
+                const titulo = document.getElementById("titulo");
+                titulo.textContent = "¡Texto Modificado Con JavaScript!";
+                titulo.style.color = "skyblue";
+            }
+            function restaurarTexto(){
+                const titulo = document.getElementById("titulo");
+                titulo.textContent = "Texto Original";
+                titulo.style.color = "";
+            }
+        </script>
+    </section>
+    <section id="modo">
+        <h2>5. Modo Oscuro</h2>
+        <button onclick="cambiarModo()">Activar / Desactivar Modo Oscuro</button>
+        <script>
+            function cambiarModo(){
+                document.body.classList.toggle("modo-oscuro");
+            }
+        </script>
+    </section>
+    <section id="formulario">
+        <h2>6. Validación de Formulario</h2>
+        <form onsubmit="validar(event)">
+            <label>Nombre: <input type="text" id="nombre" placeholder="Tu nombre"></label>
+            <button type="submit">Enviar</button>
+        </form>
+        <script>
+            function validar(e){
+                e.preventDefault();
+                const nombre = document.getElementById("nombre").value;
+                if(nombre.trim() === ""){
+                    alert("El campo nombre no puede estar vacío.");
+                    document.getElementById("nombre").style.borderColor = "red";
+                } else {
+                    alert("Bienvenido, " + nombre + "!");
+                    document.getElementById("nombre").style.borderColor = "green";
+                }
+            }
+        </script>
+    </section>
+    <section id="cuadro">
+        <h2>7. Cuadro Interactivo</h2>
+        <p>Pasa el mouse encima del cuadro para agrandarlo.</p>
+        <div id="caja"></div>
+        <script>
+            const cuadro = document.getElementById("caja");
+            cuadro.addEventListener("mouseover", () => cuadro.style.transform = "scale(1.5)");
+            cuadro.addEventListener("mouseout", () => cuadro.style.transform = "scale(1)");
+        </script>
+    </section>
+    <section id="calculadora">
+        <h2>8. Calculadora</h2>
+        <div class="calculadora-container">
+            <div class="calculadora-fila">
+                <input type="number" id="num1" placeholder="Primer número">
+            </div>
+            <div class="calculadora-fila">
+                <select id="opcion">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                </select>
+            </div>
+            <div class="calculadora-fila">
+                <input type="number" id="num2" placeholder="Segundo número">
+            </div>
+            <div class="calculadora-fila">
+                <button onclick="calcular()">Calcular</button>
+            </div>
+            <div class="calculadora-fila">
+                <input type="text" id="resultado" placeholder="Resultado" readonly>
+            </div>
+        </div>
+        <script>
+            function calcular(){
+                let numero1 = Number(document.getElementById("num1").value);
+                let numero2 = Number(document.getElementById("num2").value);
+                let operacion = document.getElementById("opcion").value;
+                let resultado;
+                
+                if(isNaN(numero1) || isNaN(numero2)) {
+                    alert("Por favor, ingresa números válidos en ambos campos.");
+                    return;
+                }
+                if(operacion === "+"){
+                    resultado = numero1 + numero2;
+                }else if(operacion === "-"){
+                    resultado = numero1 - numero2;
+                }else if(operacion === "*"){
+                    resultado = numero1 * numero2;
+                }else if(operacion === "/"){
+                    if(numero2 == 0){
+                        alert("Error: División por cero no es posible.");
+                        return;
+                    }else{
+                        resultado = numero1 / numero2;
+                    }
+                }
+                document.getElementById("resultado").value = resultado;
+            }
+        </script>
+    </section>
+    
+    <footer>
+        <p><strong>© 2025 - Página con JavaScript creada por Axel</strong></p>
+    </footer>
+</body>
+</html>
